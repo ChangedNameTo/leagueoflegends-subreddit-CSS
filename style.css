@@ -1,3 +1,14 @@
+/* Fake GIF */
+
+.side::before {
+    content: "";
+    display: inline-block;
+    width: 260px;
+    height: 271px;
+    margin-left: 20px;
+    background-image: url(%%test-ani%%);
+}
+
 /*
 Colors
 ------
@@ -111,17 +122,14 @@ html.res-nightmode .link .buttons li a.comments:hover {
 	height: 16px !important;
 	top: 19px;
 	
-	padding-top: 6px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 4px 8px 6px !important;
 	
 	background-color: #161616 !important;
 	
 	border-color: #2B2B2B;
 	border-width: 1px;
 	border-style: none none solid solid;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 7px;
+	border-radius: 0 !important;
 }
 
 #header-bottom-right #userbarToggle {
@@ -145,6 +153,14 @@ html.res-nightmode .link .buttons li a.comments:hover {
 
 #header-bottom-right .user > a {
 	color: #0096FF;
+}
+
+#mail.nohavemail {
+	opacity: 0.8;
+}
+
+#mail.havemail {
+	transition: all 1s ease-in-out 0s;
 }
 
 /* Main header */
@@ -984,7 +1000,8 @@ body.res .titlebox .fancy-toggle-button {
 .comments-page .content[role="main"],
 .related-page .content[role="main"],
 .submit-page .formtabs-content,
-.wiki-page .wiki-page-content {
+.wiki-page .content[role="main"]
+/*.wiki-page .wiki-page-content*/ {
 	min-height: 105px;
 	
 	background-color: rgba(255, 255, 255, 0.9);
@@ -1171,6 +1188,10 @@ html.res-nightmode div.arrow.downmod {
 
 .commentarea .infobar {
 	margin-right: 14px;
+}
+
+.wiki-page .infobar {
+	margin-top: 30px;
 }
 
 /****************
@@ -1710,6 +1731,10 @@ html.res-nightmode .link.over18.visited a.title {
 	display: none;
 }
 
+.wiki-page .wiki-page-content {
+	margin: 15px;
+}
+
 .wiki-page .pageactions {
 	position: absolute;
 	top: 240px;
@@ -1722,6 +1747,10 @@ html.res-nightmode .link.over18.visited a.title {
 	margin: 1px;
 	
 	border-radius: 0;
+}
+
+.wiki-page .pageactions .wikiaction-current {
+	background-color: rgb(14, 137, 204);
 }
 
 .wiki-page .toc {
@@ -1758,8 +1787,15 @@ html.res-nightmode .link.over18.visited a.title {
 
 .wiki-page.wiki-page-rules .toc {
 	position: fixed;
-	right: 350px;
-	top: 230px;
+	right: 334px;
+	top: 240px;
+}
+
+/* RES fixes */
+
+.markdownEditor-wrapper {
+	max-height: 30px;
+	margin-top: 34px;
 }
 
 /********
