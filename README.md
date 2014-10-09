@@ -11,6 +11,7 @@ Tentative TODO list
 - Header announcements
 - Comment text area rules
 - Submission page rules (large RTFR button)
+- Release-quality images for menu bar and sidebar
 - User flair (using as little CSS as possible)
 - Post flair
 
