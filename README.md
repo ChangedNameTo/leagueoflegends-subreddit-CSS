@@ -20,3 +20,7 @@ Tentative TODO list
 - Spoiler tagging
 - Optimize logo image
 - Sidebar contents
+
+**Long-term goals**
+
+- Further optimization of CSS size
