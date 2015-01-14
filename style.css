@@ -2235,13 +2235,13 @@ html.res-nightmode .info-notice {
 
 html:lang(dd) .link,
 html.res-nightmode .link {
-	background-color: rgba(22, 22, 22, 0.25);
+	background-color: rgba(22, 22, 22, 0.25) !important;
 	border-image: linear-gradient(to right, rgba(80, 80, 80, 0) 0%, rgba(80, 80, 80, 0.4) 15%, rgba(80, 80, 80, 0.4) 85%, rgba(80, 80, 80, 0) 100%) 1;
 }
 
 html:lang(dd) .link.odd,
 html.res-nightmode .link.odd {
-	background-color: rgba(22, 22, 22, 0.35);
+	background-color: rgba(22, 22, 22, 0.35) !important;
 }
 
 html:lang(dd) .link:hover,
