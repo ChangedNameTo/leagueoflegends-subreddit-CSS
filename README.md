@@ -8,15 +8,16 @@ Tentative TODO list
 
 **Add**
 
-- Header announcements
 - Comment text area rules
 - Submission page rules (large RTFR button)
 - Release-quality images for menu bar and sidebar
+- Sidebar events and tournaments section (ensure can be edited by a bot)
 - User flair (using as little CSS as possible)
 - Post flair
 
 **Finish**
 
+- Header announcements
 - Markdown styling, especially dark theme
 - Spoiler tagging
 - Optimize logo image
