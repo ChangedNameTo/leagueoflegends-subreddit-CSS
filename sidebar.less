@@ -1,0 +1,635 @@
+@import (reference) "style";
+
+// Helpers
+
+.side-container-defaults() {
+	background-color: @side-bg;
+	border: 1px solid @side-border;
+	border-radius: none;
+	
+	color: @submit-color;
+}
+
+.side-header-case-fix() {
+	text-transform: lowercase;
+	
+	&:first-letter {
+		text-transform: uppercase;
+	}
+}
+
+// Main stuff
+
+.side {
+	background: none !important;
+	
+	// Submit buttons
+	.submit {
+		.morelink {
+			width: 132px !important;
+			
+			background: @submit-bg !important;
+			
+			border: 1px solid rgb(0, 0, 0) !important;
+			border-radius: 0 !important;
+			outline: 1px solid @submit-bg !important;
+			
+			transition: 0.1s linear outline;
+			
+			&:hover {
+				outline: 1px solid @submit-color !important;
+			}
+			
+			a {
+				font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
+				font-weight: normal;
+				font-size: 18px;
+				letter-spacing: 1px;
+				color: @submit-color !important;
+			}
+			
+			.nub {
+				background: none;
+			}
+		}
+		
+		&.submit-link {
+			.side-container-defaults() !important;
+			
+			padding: 8px;
+		}
+		
+		&.submit-text {
+			float: right;
+			position: relative;
+			margin-top: -52px;
+			margin-right: 10px;
+		}
+		
+		// Disabled submit buttons
+		&.disabled {
+			.morelink {
+				display: none;
+			}
+			
+			.spacer {
+				padding: 8px 12px;
+				
+				background-color: @side-bg;
+				border: 1px solid @side-border;
+			}
+			
+			.subtitle {
+				margin: 0;
+				
+				font-size: 0;
+				
+				&:after {
+					content: @submit-flood-warning;
+					font-size: 13px;
+					color: rgb(255, 20, 20);
+					text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+				}
+			}
+		}
+		
+		// Submit button rules warning
+		body:not(.subscriber) &.submit-text::after {
+			content: @submit-rules-warning;
+			display: block;
+			width: 294px;
+			height: 29px;
+			position: absolute;
+			top: -8px;
+			left: -155px;
+			
+			padding: 9px 2px;
+			
+			background-color: rgba(40, 40, 40, 0.8);
+			
+			text-align: center;
+			color: rgb(230, 230, 230);
+			font-size: 11px;
+			text-shadow: 1px 1px 1px black;
+			
+			transition: opacity 0.1s linear, top 0.1s linear;
+		}
+	}
+	
+	// Hide submit button rules warning
+	.spacer:hover + .spacer > .submit-text::after, .submit-text:hover::after,
+	.spacer:focus + .spacer > .submit-text::after, .submit-text:focus::after {
+		opacity: 0;
+		top: 32px !important;
+	}
+	
+	// Mod-editable markdown area
+	.usertext {
+		margin: 0 -8px;
+	}
+	
+	.md {
+		overflow: visible;
+		
+		// Default markdown element styling
+		ul, ol {
+			padding-left: 0;
+		}
+		
+		li {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		
+		// Sections
+		blockquote:nth-of-type(n+2) {
+			margin: 6px 0 8px;
+			padding: 0;
+			
+			border-left-width: 0;
+			
+			// Section headers
+			> h1, > h2, > h3 {
+				line-height: 40px;
+				margin-bottom: 10px;
+				
+				background-color: @side-header-bg !important;
+				border-top: 1px solid @side-border;
+				border-bottom: 1px solid @side-border;
+				
+				text-align: center;
+				font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
+				font-size: @side-header-font-size;
+				font-weight: normal;
+				letter-spacing: 1px;
+				color: @side-color !important;
+				
+				.side-header-case-fix();
+			}
+		}
+		
+		// Content areas (inside and outside sections)
+		> :not(blockquote):nth-of-type(n+2),
+		> blockquote:nth-of-type(n+2) > :not(:first-child) {
+			margin: 0 10px;
+		}
+		
+		> p {
+			position: relative;
+			
+			margin: 0 10px;
+			
+			text-align: center;
+			font-size: 10px;
+		}
+		
+		// Theme select
+		h3 + p {
+			text-align: center;
+			
+			a {
+				display: inline-block;
+				width: 100px;
+				height: 40px;
+				
+				border: 1px solid black;
+				outline: 1px solid @side-border;
+				
+				text-shadow: none;
+				
+				transition: border-color 0.15s linear, box-shadow 0.15s linear;
+				
+				&:hover {
+					border-color: rgb(200, 200, 200);
+					box-shadow: 0 0 4px 1px rgba(200, 200, 200, 0.4);
+				}
+				
+				// Light theme button
+				&:first-child {
+					margin-right: -3px;
+					
+					background-image: url(%%light-button%%);
+					border-style: solid none solid solid;
+				}
+				
+				// Dark theme button
+				&:last-child {
+					background-image: url(%%dark-button%%);
+					border-style: solid solid solid none;
+				}
+			}
+		}
+		
+		// News
+		h2 + ol {
+			list-style: none;
+			
+			background-color: fadein(@side-bg, 100%) !important;
+			border: 1px solid @side-border !important;
+			
+			li {
+				height: @news-height;
+				
+				background-image: url(%%news%%);
+				background-repeat: no-repeat;
+				
+				opacity: @news-opacity;
+				transition: opacity 0.2s;
+				
+				&:hover {
+					opacity: 1.0;
+				}
+				
+				.generate-news();
+				.generate-news(@i: 1) when (@i <= @news-num) {
+					&:nth-child(@{i}) {
+						background-position: 0 -(@news-height * (@i - 1));
+					}
+					.generate-news(@i + 1);
+				}
+				
+				a {
+					display: inline-block;
+					width: 100%;
+					
+					em {
+						display: block;
+						height: 22px;
+						
+						margin-top: 40px;
+						padding-top: 3px;
+						
+						background-color: @news-fade;
+						
+						text-align: center;
+						text-transform: uppercase;
+						color: #FFFFFF;
+						font-family: @news-font;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: bold;
+						letter-spacing: -1px;
+					}
+				}
+			}
+		}
+	}
+	
+	// Bottom boxes (like mod tools and recently visited posts)
+	.sidecontentbox {
+		.content {
+			.side-container-defaults() !important;
+		}
+		
+		.title {
+			line-height: 40px;
+			
+			background-color: rgba(40, 40, 40, 0.9);
+			border: 1px solid @side-border;
+			border-bottom: none;
+			
+			text-align: center;
+			
+			h1 {
+				display: inline-block;
+				.side-header-case-fix();
+				
+				font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
+				font-size: @side-header-font-size;
+				font-weight: normal;
+				letter-spacing: 1px;
+				color: @side-color !important;
+			}
+		}
+		
+		.collapse-button {
+			margin: 14px 6px;
+		}
+	}
+	
+	// Promo image
+	a[href$="#promo"] {
+		display: block;
+		width: 298px;
+		height: 178px;
+		
+		position: absolute;
+		left: -11px;
+		top: -282px;
+		
+		background-image: url(%%promo%%);
+		border: 1px solid @side-border;
+		
+		opacity: @news-opacity;
+		transition: opacity 0.2s;
+		
+		&:hover {
+			opacity: 1;
+		}
+		
+		.loggedin & {
+			top: -314px;
+		}
+		
+		.res & {
+			top: -300px;
+		}
+		
+		.loggedin.res & {
+			top: -330px;
+		}
+		
+		.moderator & {
+			top: -335px;
+		}
+		
+		.moderator.res & {
+			top: -351px;
+		}
+	}
+	
+	// Hide the "who made it/age" section
+	.bottom {
+		display: none;
+	}
+	
+	// Large mod message button
+	a.helplink {
+		display: block;
+		width: 278px;
+		position: absolute;
+		float: none;
+		
+		margin-top: 54px;
+		margin-left: 10px;
+		padding: 6px 0;
+		
+		background: rgb(85, 54, 33);
+		
+		border: 1px solid rgb(0, 0, 0) !important;
+		border-radius: 0 !important;
+		outline: 1px solid rgb(85, 54, 33);
+		
+		text-align: center;
+		font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
+		font-weight: normal;
+		font-size: 18px;
+		letter-spacing: 1px;
+		color: @side-color !important;
+		
+		.side-header-case-fix();
+		
+		transition: 0.1s linear outline;
+		
+		&:hover {
+			outline: 1px solid @side-color;
+		}
+		
+		& + .title + .content {
+			padding-top: 52px;
+		}
+	}
+}
+
+// Login
+.login-form-side {
+	.side-container-defaults() !important;
+	
+	input {
+		background-color: rgba(5, 5, 13, 0.9);
+	}
+}
+
+// Search
+#search {
+	position: relative;
+	
+	input[type="submit"] {
+		background-color: transparent !important;
+		background-position: -20px -838px !important;
+		background-image: url(%%sprite-reddit%%) !important;
+	}
+	
+	input[type="text"] {
+		.side-container-defaults() !important;
+		
+		padding: 3px 1px;
+		
+		font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
+		font-size: 16px;
+		color: @link !important;
+		text-indent: 6px;
+	}
+}
+
+#searchexpando {
+	width: 278px;
+	
+	position: absolute;
+	margin-top: 2px;
+	z-index: 9001;
+	
+	background-color: fadein(@side-bg, 50%) !important;
+	border-color: @side-border !important;
+	border-radius: 0;
+	
+	color: @side-color !important;
+}
+
+// Subreddit info
+.linkinfo {
+	.totalvotes {
+		margin-left: 8px;
+		
+		span {
+			font-size: 13px;
+		}
+	}
+	
+	.upvotes {
+		color: rgb(205, 69, 0) !important;
+		
+		span:extend(.linkinfo .totalvotes span) {}
+	}
+	
+	.downvotes {
+		color: rgb(95, 153, 207) !important;
+		
+		span:extend(.linkinfo .totalvotes span) {}
+	}
+}
+
+.titlebox {
+	.side-container-defaults() !important;
+	
+	margin-top: 200px;
+	padding: 0 8px 8px;
+	
+	a {
+		color: @link;
+		
+		&:hover {
+			color: @side-color;
+			text-decoration: none;
+		}
+	}
+	
+	> p {
+		color: @submit-color !important;
+	}
+	
+	.redditname {
+		height: 22px;
+		
+		margin: 0 -8px 6px;
+		padding: 8px 0;
+		
+		background-color: rgba(200, 200, 200, 0.2) !important;
+		border-bottom: 1px solid @side-border !important;
+		
+		text-align: center;
+		
+		border-bottom: none;
+		
+		a {
+			font-family: "Constantia","Palatino","Georgia",serif;
+			font-weight: normal;
+			font-size: @side-header-font-size;
+			color: @side-color !important;
+			
+			&:before {
+				content: "Welcome to /r/";
+			}
+		}
+	}
+	
+	.subButtons {
+		height: 22px;
+		
+		.fancy-toggle-button a,
+		.RESshortcut {
+			color: white !important;
+		}
+	}
+	
+	.leavemoderator {
+		margin-right: -13px;
+		
+		background: none;
+		
+		font-size: 11px;
+		color: @side-secondary-color !important;
+	}
+	
+	form.flairtoggle {
+		vertical-align: middle;
+		padding-top: 2px;
+		
+		background: none;
+		
+		label:extend(.titlebox .leavemoderator), input {
+			margin-top: 0;
+			vertical-align: middle;
+		}
+	}
+	
+	.tagline {
+		height: 12px;
+		margin: 0 0 0 20px;
+		font-size: 11px;
+	}
+	
+	.flairselectbtn:after {
+		content: "flair";
+		margin-left: 3px;
+	}
+	
+	.fancy-toggle-button {
+		display: block;
+	}
+	
+	.res & .fancy-toggle-button {
+		display: inline-block;
+	}
+}
+
+.subscribers {
+	margin: 0 4px 0 10px;
+	
+	&:after {
+		content: @side-user-text;
+	}
+	
+	.word {
+		display: none;
+	}
+}
+
+.users-online {
+	display: inline;
+	
+	&:before {
+		background: none;
+		width: 0;
+	}
+	
+	.number:before {
+		content: "(";
+	}
+	
+	&:after {
+		content: "@{side-online-text})";
+	}
+	
+	.word {
+		display: none;
+	}
+}
+
+.leavemoderator {
+	height: 10px;
+	font-size: 9px;
+}
+
+.flairtoggle {
+	height: 18px;
+	font-size: 10px;
+}
+
+// Bottom boxes
+.icon-menu a {
+	background: none;
+}
+
+// Create subreddit button
+.sidebox.create {
+	margin-bottom: 25px;
+	
+	background-color: transparent !important;
+	border: 1px solid fadeout(@side-border, 40%) !important;
+	border-radius: 0 !important;
+	
+	transition: 0.1s linear border-color;
+	
+	&:hover {
+		border-color: @side-border !important;
+	}
+	
+	.morelink {
+		background: fadeout(@side-border, 40%) !important;
+		border: 1px solid black !important;
+		border-radius: 0 !important;
+		
+		a, a:hover {
+			color: rgba(200, 200, 200, 0.8) !important;
+		}
+		
+		.nub {
+			background: none;
+		}
+	}
+	
+	.spacer {
+		display: none;
+	}
+}

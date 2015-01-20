@@ -1,0 +1,45 @@
+@import (reference) "darkmode";
+@import (reference) "style-darkmode";
+@import (reference) "sidebar";
+
+@{nightmode-selector} {
+	.side {
+		.md,
+		.md > blockquote,
+		.md > blockquote u {
+			.nightmode-bg-fix();
+		}
+		
+		.title {
+			border-bottom: none;
+		}
+		
+		.submit,
+		.sidecontentbox .title h1 {
+			border: none;
+			border-radius: 0;
+		}
+		
+		.submit-text {
+			overflow: visible;
+			
+			margin-top: -53px;
+			margin-right: 9px;
+			
+			border: 1px solid rgb(85, 54, 33) !important;
+			
+			&:hover {
+				border-color: rgb(202, 181, 162) !important;
+			}
+		}
+	}
+	
+	.titlebox {
+		//&:extend(.titlebox);
+		
+		.leavemoderator,
+		form.toggle {
+			.nightmode-bg-fix();
+		}
+	}
+}

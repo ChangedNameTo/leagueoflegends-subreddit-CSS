@@ -1,0 +1,221 @@
+@import (reference) "style-darkmode";
+
+// Separate modules
+@import "sidebar-darkmode";
+
+// Variables
+@darkmode-selector: ~"html:lang(dd)";
+@nightmode-selector: ~"html.res-nightmode";
+
+/*************************
+* Darkmode and nightmode *
+*************************/
+
+@{darkmode-selector}, @{nightmode-selector} {
+	body {
+		color: rgb(204, 204, 204);
+	}
+	
+	.listing-page .content[role="main"],		/* Listing pages */
+	.comments-page .content[role="main"],		/* Comment pages */
+	.related-page .content[role="main"],		/* Every other page */
+	.submit-page .formtabs-content {			/* Submission pages */
+		background-color: rgba(3, 35, 42, 0.82) !important;
+	}
+	
+	#siteTable {
+		border-top-color: rgba(80, 80, 80, 0.3);
+	}
+	
+	.comment .usertext .md {
+		color: @dark-color;
+	}
+	
+	.infobar {
+		background-color: rgba(20, 16, 0, 0.8);
+		border-color: rgb(153, 91, 0);
+		
+		color: @dark-color;
+		
+		&.welcome {
+			background-image: url(%%welcome-lines-dark%%);
+			
+			h1 {
+				background-color: black;
+			}
+			
+			h2 {
+				background-color: black;
+				background-image: url(%%welcome-upvote-dark%%);
+				color: white;
+			}
+		}
+	}
+	
+	.info-notice {
+		background-color: rgba(0, 16, 20, 0.9) !important;
+		
+		color: @dark-color;
+	}
+	
+	.link {
+		:not(.single-page) & {
+			background-color: @dark-link-bg !important;
+			
+			&.odd {
+				background-color: @dark-link-alt-bg !important;
+			}
+		}
+		border-image: linear-gradient(to right, rgba(80, 80, 80, 0) 0%, rgba(80, 80, 80, 0.4) 15%, rgba(80, 80, 80, 0.4) 85%, rgba(80, 80, 80, 0) 100%) 1;
+		
+		&.stickied {
+			.title,
+			.stickied-tagline {
+				color: @dark-color !important;
+			}
+		}
+		
+		:not(.single-page) &:hover {
+			background-color: @dark-link-hover-bg !important;
+			
+			.rank {
+				background-color: rgba(0, 0, 0, 0.35);
+			}
+		}
+		
+		.title {
+			color: @dark-link-title-color !important;
+			
+			&:visited {
+				color: @dark-link-title-visited-color !important;
+			}
+		}
+		
+		.rank {
+			background-color: rgba(0, 0, 0, 0.15);
+		}
+		
+		.tagline,
+		.tagline time,
+		.domain,
+		.domain a {
+			color: @dark-link-button-color;
+		}
+		
+		.buttons li a {
+			&:extend(@{darkmode-selector} .link .tagline);
+			
+			&.comments {
+				color: @dark-link-comment-color;
+			}
+		}
+		
+		.usertext {
+			.md {
+				background-color: transparent;
+				border: none;
+				
+				padding: 20px 0;
+				
+				color: @dark-color;
+			}
+			
+			.usertext-body {
+				border-color: rgb(25, 86, 87);
+				border-style: solid none;
+				border-width: 1px;
+			}
+		}
+	}
+	
+	// Vote arrows
+	.arrow.up,
+	.arrow.upmod,
+	.arrow.down,
+	.arrow.downmod,
+	.arrow.up:hover,
+	.arrow.upmod:hover,
+	.arrow.down:hover,
+	.arrow.downmod:hover {
+		background-image: url(%%arrows-dark%%) !important;
+		width: 20px !important;
+		height: 16px !important;
+	}
+	
+	// No comments
+	#noresults {
+		background-color: rgb(3, 35, 42);
+		border: 1px solid rgb(25, 86, 87);
+		box-shadow: none;
+		
+		color: rgb(3, 35, 42);
+		
+		&:after {
+			color: rgb(174, 37, 15);
+		}
+	}
+	
+	// Comments
+	.commentarea .nestedlisting .comment {
+		border-color: rgb(18, 61, 61) !important;
+	}
+	
+	.commentarea .nestedlisting div.thing.comment:hover {		/* y u force me to make such long selectors RES? */
+		border: 1px solid rgb(31, 124, 124) !important;
+	}
+	
+	.comment,
+	.comment .comment .comment,
+	.comment .comment .comment .comment .comment,
+	.comment .comment .comment .comment .comment .comment .comment,
+	.comment .comment .comment .comment .comment .comment .comment .comment .comment,
+	.comment .comment .comment .comment .comment .comment .comment .comment .comment .comment .comment {
+		background-color: rgb(0, 30, 38) !important;
+	}
+	
+	.comment .comment,
+	.comment .comment .comment .comment,
+	.comment .comment .comment .comment .comment .comment,
+	.comment .comment .comment .comment .comment .comment .comment .comment,
+	.comment .comment .comment .comment .comment .comment .comment .comment .comment .comment {
+		background-color: rgb(3, 35, 42) !important;
+	}
+	
+	// Mod stuff
+	.linefield,
+	#subreddit_stylesheet,
+	#images,
+	#image-preview-list li {
+		background-color: rgba(3, 35, 42, 0.92) !important;
+	}
+	
+	// NP
+	body:lang(np):not(.subscriber) #siteTable:before {
+		background-color: rgba(112, 53, 0, 0.7);
+		border-color: rgb(191, 122, 19);
+		color: white;
+	}
+}
+
+/****************
+* RES nightmode *
+****************/
+
+.nightmode-bg-fix() {
+	background-color: transparent !important;
+}
+
+@{nightmode-selector} {
+	#header,
+	#header-bottom-left,
+	:not([class*="-page"]) .content[role="main"],
+	.submit-page .content,
+	.icon-menu a,
+	.side blockquote ul {
+		.nightmode-bg-fix();
+	}
+	
+	.midcol .arrow {
+		margin-top: 2px;
+	}
+}
