@@ -59,14 +59,12 @@
 	}
 	
 	.link {
-		:not(.single-page) & {
-			background-color: @dark-link-bg !important;
-			
-			&.odd {
-				background-color: @dark-link-alt-bg !important;
-			}
-		}
+		background-color: @dark-link-bg !important;
 		border-image: linear-gradient(to right, rgba(80, 80, 80, 0) 0%, rgba(80, 80, 80, 0.4) 15%, rgba(80, 80, 80, 0.4) 85%, rgba(80, 80, 80, 0) 100%) 1;
+		
+		&.odd {
+			background-color: @dark-link-alt-bg !important;
+		}
 		
 		&.stickied {
 			.title,
@@ -75,7 +73,7 @@
 			}
 		}
 		
-		:not(.single-page) &:hover {
+		&:hover {
 			background-color: @dark-link-hover-bg !important;
 			
 			.rank {
@@ -126,6 +124,10 @@
 				border-width: 1px;
 			}
 		}
+	}
+	
+	.single-page .link:extend(@{darkmode-selector} .link) {
+		background-color: transparent !important;
 	}
 	
 	// Vote arrows

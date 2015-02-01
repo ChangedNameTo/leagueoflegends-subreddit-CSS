@@ -21,7 +21,14 @@
 // Main stuff
 
 .side {
+	margin-right: 8px;
+	
 	background: none !important;
+	
+	// General links
+	a {
+		color: @link;
+	}
 	
 	// Submit buttons
 	.submit {
@@ -34,7 +41,7 @@
 			border-radius: 0 !important;
 			outline: 1px solid @submit-bg !important;
 			
-			transition: 0.1s linear outline;
+			transition: outline @transition-time ease;
 			
 			&:hover {
 				outline: 1px solid @submit-color !important;
@@ -112,7 +119,7 @@
 			font-size: 11px;
 			text-shadow: 1px 1px 1px black;
 			
-			transition: opacity 0.1s linear, top 0.1s linear;
+			transition: opacity @transition-time linear, top @transition-time linear;
 		}
 	}
 	
@@ -171,7 +178,7 @@
 		// Content areas (inside and outside sections)
 		> :not(blockquote):nth-of-type(n+2),
 		> blockquote:nth-of-type(n+2) > :not(:first-child) {
-			margin: 0 10px;
+			margin: 0 9px;
 		}
 		
 		> p {
@@ -197,7 +204,7 @@
 				
 				text-shadow: none;
 				
-				transition: border-color 0.15s linear, box-shadow 0.15s linear;
+				transition: border-color @transition-time ease, box-shadow @transition-time ease;
 				
 				&:hover {
 					border-color: rgb(200, 200, 200);
@@ -234,7 +241,7 @@
 				background-repeat: no-repeat;
 				
 				opacity: @news-opacity;
-				transition: opacity 0.2s;
+				transition: opacity @side-glow-time ease;
 				
 				&:hover {
 					opacity: 1.0;
@@ -321,7 +328,7 @@
 		border: 1px solid @side-border;
 		
 		opacity: @news-opacity;
-		transition: opacity 0.2s;
+		transition: opacity @side-glow-time ease;
 		
 		&:hover {
 			opacity: 1;
@@ -379,7 +386,7 @@
 		
 		.side-header-case-fix();
 		
-		transition: 0.1s linear outline;
+		transition: @transition-time ease outline;
 		
 		&:hover {
 			outline: 1px solid @side-color;
@@ -609,7 +616,7 @@
 	border: 1px solid fadeout(@side-border, 40%) !important;
 	border-radius: 0 !important;
 	
-	transition: 0.1s linear border-color;
+	transition: border-color @transition-time ease;
 	
 	&:hover {
 		border-color: @side-border !important;

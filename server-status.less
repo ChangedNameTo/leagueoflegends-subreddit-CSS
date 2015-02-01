@@ -13,16 +13,16 @@
 }
 
 .inactive-tab-gradient(@color) {
-	.tab-gradient(desaturate(darken(@color, 20%), 15%), @color);
+	.tab-gradient(desaturate(darken(@color, 12%), 15%), @color);
 }
 
 .active-tab-gradient(@color) {
-	.tab-gradient(@color, desaturate(lighten(@color, 15%), 20%));
+	.tab-gradient(@color, desaturate(lighten(@color, 12%), 15%));
 }
 
 // Style
 .side .md > ol {
-	height: 40px + @status-tab-height;
+	height: 36px + @status-tab-height;
 	position: absolute;
 	left: @status-pos-x;
 	top: @status-pos-y;
@@ -38,7 +38,7 @@
 	list-style: none;
 	text-align: center;
 	
-	transition: top 0.3s ease 0s;
+	transition: top @status-open-time ease;
 	
 	&:hover {
 		top: @status-pos-y - 40 + 4 !important;
@@ -84,7 +84,7 @@
 				position: absolute;
 				left: 0;
 				
-				padding-top: 5px;
+				padding-top: 2px;
 				
 				background: @status-norm;
 				

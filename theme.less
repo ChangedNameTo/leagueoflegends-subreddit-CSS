@@ -25,7 +25,7 @@ a,
 .tagline a,
 html.res-nightmode .res-nightmode a,
 html.res-nightmode .res-nightmode a.option {
-	color: @link;
+	//color: @link;
 }
 
 /*********
@@ -116,7 +116,7 @@ html.res-nightmode .res-nightmode a.option {
 	}
 	
 	// Normal links
-	a:extend(#sr-header-area a) {}
+	a:not(.message-count):extend(#sr-header-area a) {}
 	
 	// User link
 	.user > a:extend(.srdrop .title) {}
@@ -128,7 +128,7 @@ html.res-nightmode .res-nightmode a.option {
 		}
 		
 		&.havemail {
-			transition: all 1s ease-in-out 0s;
+			transition: all 1s ease-in-out;
 		}
 	}
 	
@@ -161,7 +161,7 @@ html.res-nightmode .res-nightmode a.option {
 #header-img-a {
 	width: 260px;
 	position: absolute;
-	left: calc(22% - 240px);
+	left: calc(~'22% - 270px');
 	top: 113px;
 	
 	text-align: center;
@@ -171,7 +171,7 @@ html.res-nightmode .res-nightmode a.option {
 #header .pagename {
 	position: absolute;
 	top: 20px;
-	left: calc(40% - 75px);
+	left: calc(~'40% - 142px');
 	
 	font-size: 0;
 	
@@ -191,23 +191,21 @@ html.res-nightmode .res-nightmode a.option {
 * Common *
 *********/
 
-/* Frame */
-
+// Frame
 .listing-page .content[role="main"],
 .comments-page .content[role="main"],
 .related-page .content[role="main"],
 .submit-page .formtabs-content,
-.wiki-page .content[role="main"]
-/*.wiki-page .wiki-page-content*/ {
+.wiki-page .content[role="main"] {
 	min-height: 105px;
 	
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.85);
 	border-image: url(%%frame-menued%%) ~'100 100 100 100 / 100px 100px 100px 100px / 22px 15px 20px 15px round round';
 	
-	margin: 25px 324px 0px 16px;
+	margin: 25px 326px 0px 16px;
 	padding: 38px 14px 8px 15px !important;
 	
-	transition: background-color 0.2s linear;
+	transition: background-color @transition-time linear;
 }
 
 .listing-page .content[role="main"],
@@ -225,87 +223,104 @@ html.res-nightmode .res-nightmode a.option {
 	background-color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* Frame menu */
-
+// Frame menu
 .tabmenu {
 	position: absolute;
 	top: 200px;
 	left: 60px;
-}
-
-.tabmenu li {
-	display: inline-block;
 	
-	margin: 0;
-	padding: 0 10px;
+	li {
+		display: inline-block;
+		
+		margin: 0;
+		padding: 0 10px;
+		
+		&:not(:last-child) {
+			background-image: url(%%frame-menu-divider%%);
+			background-repeat: no-repeat;
+			background-position: right center;
+		}
+		
+		a {
+			background: none !important;
+			border: none !important;
+			
+			font-size: 13px !important;
+			font-weight: bold !important;
+			color: rgb(200, 200, 200) !important;
+			transition: text-shadow @transition-time ease, color @transition-time ease;
+		}
+		
+		&:hover a {
+			color: white !important;
+			text-shadow: 0 0 4px rgba(200, 200, 200, 0.5);
+		}
+		
+		&.selected a {
+			&:extend(.tabmenu li:hover a);
+			
+			background: none;
+			border: none;
+		}
+	}
 }
 
-.tabmenu li:not(:last-child) {
-	background-image: url(%%frame-menu-divider%%);
-	background-repeat: no-repeat;
-	background-position: right center;
-}
-
-.tabmenu li a {
-	background: none !important;
-	border: none !important;
+// Things
+.thing {
+	.tagline {
+		// User coloring
+		.author {
+			color: @entry-author;
+			
+			border-radius: 2px !important;
+			font-weight: normal !important;
+			
+			&:hover {
+				color: @link-highlight;
+				text-decoration: none !important;
+			}
+			
+			// Coloring by type
+			&.submitter {
+				background-color: #0055df !important;
+				
+				color: white !important;
+				padding: 0 2px;
+				
+				&:hover {
+					background-color: #4e7eab !important;
+				}
+			}
+			
+			&.moderator {
+				background-color: #228822 !important;
+				
+				color: white !important;
+				padding: 0 2px;
+				
+				&:hover {
+					background-color: #134913 !important;
+				}
+			}
+		}
+	}
 	
-	font-size: 13px !important;
-	font-weight: bold !important;
-	color: rgb(200, 200, 200) !important;
-	transition: 0.1s linear text-shadow, 0.1s linear color;
+	.buttons {
+		font-family: @font-family;
+		font-size: 12px;
+		color: @entry-buttons-color;
+	}
 }
 
-.tabmenu li.selected a {
-	background: none;
-	border: none;
-}
-
-.tabmenu li.selected a,
-.tabmenu li:hover a {
-	color: white !important;
-	text-shadow: 0 0 4px rgba(200, 200, 200, 0.5);
-}
-
-/* Usernames */
-
-.thing .tagline .author.submitter {
-	background-color: #0055df !important;
-	border-radius: 3px;
-	color: white !important;
-	font-weight: bold;
-	padding: 0 2px;
-}
-
-.thing .tagline .author.submitter:hover {
-	background-color: #4e7eab !important;
-	text-decoration: none !important;
-}
-
-.thing .tagline .author.moderator {
-	background-color: #228822 !important;
-	border-radius: 3px;
-	color: white !important;
-	font-weight: bold;
-	padding: 0 2px;
-}
-
-.thing .tagline .author.moderator:hover {
-	background-color: #134913 !important;
-	text-decoration: none !important;
-}
-
-/* Arrows */
-
-.thing .midcol,
-.gadget .midcol {
+// Arrows
+.thing .midcol {
 	width: 20px;
 	position: relative;
 	overflow: visible;
 	z-index: 1;
 }
 
-.gadget .midcol {
+.gadget .midcol:extend(.thing .midcol) {
 	margin-right: 4px;
 }
 
@@ -319,12 +334,10 @@ html.res-nightmode .res-nightmode a.option {
 html:lang(dd) div.arrow.up,
 html.res-nightmode div.arrow.up {
 	background-position: 0px 0px !important;
-}
-
-.arrow.up:hover,
-html:lang(dd) div.arrow.up:hover,
-html.res-nightmode div.arrow.up:hover {
-	background-position: -20px 0px !important;
+	
+	&:hover {
+		background-position: -20px 0px !important;
+	}
 }
 
 .arrow.down,
@@ -332,13 +345,11 @@ html:lang(dd) div.arrow.down,
 html.res-nightmode div.arrow.down {
 	background-position: 0px -16px !important;
 	opacity: 0.3;
-}
-
-.arrow.down:hover,
-html:lang(dd) div.arrow.down:hover,
-html.res-nightmode div.arrow.down:hover {
-	background-position: -20px -16px !important;
-	opacity: 1.0;
+	
+	&:hover {
+		background-position: -20px -16px !important;
+		opacity: 1.0;
+	}
 }
 
 .arrow.upmod,
@@ -353,10 +364,9 @@ html.res-nightmode div.arrow.downmod {
 	background-position: -40px -16px !important;
 }
 
-/* Downvote message */
-
+// Downvote message
 .comment .arrow.down:hover::before {
-	content: "off-topic or does not contribute to discussion";
+	content: @downvote-message;
 	display: block;
 	width: 250px;
 	line-height: 12px;
@@ -373,36 +383,67 @@ html.res-nightmode div.arrow.downmod {
 	color: white;
 }
 
-/* Thumbnails */
-
+// Thumbnails
 .thumbnail.self {
 	background-image: url(%%default-thumbnail%%);
 	background-position: center;
 }
 
-/* Expando buttons */
-
+// Expando buttons
 .expando-button {
+	width: @expando-size !important;
+	height: @expando-size !important;
+	
 	background-color: transparent;
+	background-image: url(%%collapse-buttons%%) !important;
+	background-position: 0 0 !important;
+	
+	border: 1px solid lighten(@entry-buttons-color, 10%);
+	
+	&:hover {
+		background-position: -@expando-size 0 !important;
+		
+		border-color: @entry-buttons-color;
+	}
+	
+	&.expanded {
+		margin-bottom: 0 !important;
+		
+		background-position: 0 -@expando-size !important;
+		
+		&:hover {
+			background-position: -@expando-size -@expando-size !important;
+		}
+	}
+	
+	&.selftext {
+		
+	}
+	
+	&.video {
+		
+	}
+	
+	&.image {
+		
+	}
 }
 
-/* Text post content */
-
+// Text post content
 .link .usertext .md {
 	padding: 5px 15px;
 	
 	background-color: rgb(255, 255, 255);
 	border-color: rgb(136, 136, 136);
 	border-radius: 0;
+	
+	h2 {
+		border-bottom: 1px dotted lightgray;
+		font-size: 15px;
+	}
 }
 
-.link .usertext .md h2 {
-	border-bottom: 1px dotted lightgray;
-	font-size: 15px;
-}
-
-/* Footer */
-
+// Footer
 .footer {
 	background-color: @side-bg;
 	border-color: @side-border;
@@ -413,29 +454,29 @@ html.res-nightmode div.arrow.downmod {
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
 }
 
-/* Misc. content */
-
-.content .infobar {
-	border-left: none;
-	border-right: none;
+// Misc. content
+.infobar {
+	.content & {
+		border-left: none;
+		border-right: none;
+		
+		margin: 5px 0;
+	}
 	
-	margin: 5px 0;
-}
-
-.commentarea .infobar {
-	margin-right: 14px;
-}
-
-.wiki-page .infobar {
-	margin-top: 30px;
+	.commentarea & {
+		margin-right: 14px;
+	}
+	
+	.wiki-page & {
+		margin-top: 30px;
+	}
 }
 
 /****************
 * Link listings *
 ****************/
 
-/* Sort menu */
-
+// Sort menu
 .listing-page .menuarea {
 	margin-top: 0;
 	
@@ -447,53 +488,73 @@ html.res-nightmode div.arrow.downmod {
 	border-top: 1px solid white;
 }
 
-/* Links */
-
+// Links
 .link {
 	position: relative;
 	
 	margin: 0 !important;
-	padding: 10px !important;
+	padding: 8px !important;
 	
-	background-color: rgba(255, 255, 255, 0.45);
+	background-color: rgba(255, 255, 255, 0.55);
 	border-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 15%, rgba(255, 255, 255, 0.4) 85%, rgba(255, 255, 255, 0) 100%) 1;
 	border-style: solid;
 	border-width: 0 0 1px 0;
 	
-	transition: background-color 0.2s linear 0s;
-}
-
-.link.odd {
-	background-color: rgba(255, 255, 255, 0.55);
-}
-
-.link:hover {
-	background-color: rgba(255, 255, 255, 0.65);
-}
-
-.single-page .link {
-	background-color: transparent !important;
-}
-
-.link .entry {
-	padding: 2px;
-}
-
-.link .tagline,
-.link .buttons li:not(:first-child),
-.link .domain,
-.link .score {
-	color: rgb(136, 136, 136);
-	opacity: 0.85;
+	transition: background-color @transition-time ease;
 	
-	transition: opacity 0.15s linear;
-}
-
-.link:hover .tagline,
-.link:hover .buttons li:not(:first-child),
-.link:hover .domain,
-.link:hover .score {
-	opacity: 1.0;
+	&.odd {
+		background-color: rgba(255, 255, 255, 0.65);
+	}
+	
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.75);
+	}
+	
+	// Per-page changes
+	.single-page & {
+		background-color: transparent !important;
+	}
+	
+	// Elements
+	.entry {
+		padding: 2px;
+	}
+	
+	.tagline {
+		&:extend(.thing .buttons);
+		
+		margin-top: 4px;
+	}
+	
+	.buttons {
+		&:extend(.thing .buttons);
+		
+		margin-top: 4px;
+		
+		li {
+			line-height: 1em;
+		}
+	}
+	
+	.score {
+		font-size: 13px;
+		color: @entry-buttons-color;
+	}
+	
+	.domain {
+		visibility: hidden;
+		
+		a {
+			visibility: visible;
+			
+			color: @entry-buttons-color;
+		}
+	}
+	
+	.title {
+		font-family: @font-family;
+		font-size: 18px;
+	}
 }
 
 .link .score.likes {
@@ -504,8 +565,21 @@ html.res-nightmode div.arrow.downmod {
 	color: rgb(53, 128, 221);
 }
 
-.link .buttons li a.comments {
-	color: rgb(14, 137, 204);
+.link .buttons li a {
+	color: @entry-buttons-color;
+	font-weight: normal;
+	
+	transition: color @transition-time ease;
+	
+	&:hover {
+		color: @link-highlight;
+		text-decoration: none;
+	}
+	
+	&.comments {
+		color: @link-highlight;
+		font-weight: bold;
+	}
 }
 
 .link .rank {
@@ -524,7 +598,7 @@ html.res-nightmode div.arrow.downmod {
 
 	text-align: center;
 	
-	transition: 0.1s linear background-color;
+	transition: background-color @transition-time ease;
 }
 
 .link:hover .rank {
@@ -535,8 +609,7 @@ html.res-nightmode div.arrow.downmod {
 	margin-left: 48px;
 }
 
-/* Link titles */
-
+// Link titles
 .link a.title {
 	color: rgb(14, 137, 204);
 }
@@ -546,45 +619,47 @@ html.res-nightmode div.arrow.downmod {
 	color: rgb(135, 76, 185);
 }
 
-/* Sticky */
-
-.link.stickied .rank {
-	background-image: url(%%sticky-thumbnail%%);
-	background-position: 8px 28px;
-	background-repeat: no-repeat;
-}
-
-.link.stickied .midcol,
-.link.stickied .domain,
-.link.stickied .buttons > :not(:first-child) {
-	visibility: hidden;
-	opacity: 0;
+// Sticky
+.link.stickied{
+	.rank {
+		background-image: url(%%sticky-thumbnail%%);
+		background-position: 8px 28px;
+		background-repeat: no-repeat;
+	}
 	
-	transition: 0.1s linear opacity;
+	.midcol,
+	.domain,
+	.buttons > :not(:first-child) {
+		visibility: hidden;
+		opacity: 0;
+		
+		transition: opacity @transition-time ease;
+	}
+	
+	&:hover {
+		.midcol,
+		.domain,
+	 	.buttons > :not(:first-child) {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+	
+	a.title,
+	a.title:visited,
+	&.visited a.title {
+		font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
+		font-size: 20px;
+		color: rgb(43, 43, 43);
+		text-shadow: 1px 1px 0 rgba(100, 100, 100, 0.2);
+	}
+	
+	.stickied-tagline {
+		color: rgb(43, 43, 43);
+	}
 }
 
-.link.stickied:hover .midcol,
-.link.stickied:hover .domain,
-.link.stickied:hover .buttons > :not(:first-child) {
-	visibility: visible;
-	opacity: 1;
-}
-
-.link.stickied a.title,
-.link.stickied a.title:visited,
-.link.stickied.visited a.title {
-	font-family: "Constantia","Palatino","Palatino Linotype","Georgia",serif;
-	font-size: 20px;
-	color: rgb(43, 43, 43);
-	text-shadow: 1px 1px 0 rgba(100, 100, 100, 0.2);
-}
-
-.link.stickied .stickied-tagline {
-	color: rgb(43, 43, 43);
-}
-
-/* OMG SPOILERS */
-
+// OMG SPOILERS
 .link .buttons li.nsfw-stamp {
 	display: none;
 }
@@ -608,14 +683,12 @@ html.res-nightmode .link.over18.visited a.title {
 	color: rgb(150, 0, 0) !important;
 }
 
-/* Text post content */
-
+// Text post content
 .link .usertext .usertext-body {
 	margin-right: 100px;
 }
 
-/* When nothing shows up */
-
+// When nothing shows up
 #noresults {
 	position: relative;
 	margin: 120px 160px 60px;
@@ -628,31 +701,30 @@ html.res-nightmode .link.over18.visited a.title {
 	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.05) inset, -1px -1px 2px 0 rgba(240, 240, 255, 0.3) inset;
 	
 	color: rgb(204, 204, 204);
-}
-
-#noresults:before {
-	content: "";
-	display: block;
-	width: 237px;
-	height: 200px;
-	position: absolute;
-	bottom: -54px;
-	left: -142px;
 	
-	background-image: url(%%amumu%%);
-}
-
-#noresults:after {
-	content: "there don't seem to be any friends here";
-	position: absolute;
-	top: 8px;
-	left: 16px;
+	&:before {
+		content: "";
+		display: block;
+		width: 237px;
+		height: 200px;
+		position: absolute;
+		bottom: -54px;
+		left: -142px;
+		
+		background-image: url(%%amumu%%);
+	}
 	
-	color: rgb(255, 0, 0);
+	&:after {
+		content: @no-results-message;
+		position: absolute;
+		top: 8px;
+		left: 16px;
+		
+		color: rgb(255, 0, 0);
+	}
 }
 
-/* RES things */
-
+// RES things
 .RES-keyNav-activeElement {
 	padding-left: 10px;
 	
@@ -690,8 +762,7 @@ html.res-nightmode .link.over18.visited a.title {
 * Comments *
 ***********/
 
-/* Link info */
-
+// Link info
 .linkinfo {
 	padding: 6px 8px 5px;
 	
@@ -700,21 +771,21 @@ html.res-nightmode .link.over18.visited a.title {
 	border-radius: 0;
 	
 	color: rgb(202, 181, 162);
-}
-
-.linkinfo .shortlink {
-	font-size: 90%;
-}
-
-.linkinfo .shortlink input#shortlink-text {
-	padding: 1px 0 1px 4px;
 	
-	background-color: rgba(0, 0, 0, 0.75) !important;
-	border-color: @side-border;
-	
-	color: rgb(225, 225, 225);
-	font-size: 100%;
-	font-family: arial,helvetica,sans-serif;
+	.shortlink {
+		font-size: 90%;
+		
+		input#shortlink-text {
+			padding: 1px 0 1px 4px;
+			
+			background-color: rgba(0, 0, 0, 0.75) !important;
+			border-color: @side-border;
+			
+			color: rgb(225, 225, 225);
+			font-size: 100%;
+			font-family: arial,helvetica,sans-serif;
+		}
+	}
 }
 
 // Post content/link
@@ -806,21 +877,27 @@ html.res-nightmode .link.over18.visited a.title {
 	}
 }
 
-.comment,
-.comment .comment .comment,
-.comment .comment .comment .comment .comment,
-.comment .comment .comment .comment .comment .comment .comment,
-.comment .comment .comment .comment .comment .comment .comment .comment .comment,
-.comment .comment .comment .comment .comment .comment .comment .comment .comment .comment .comment {	// weeeeeeeeeeeee
-	background-color: rgb(255, 255, 255);
+// Alternating comment coloring
+.comment {
+	background-color: @comment-level-1-bg;
+}
+.comment .comment {
+	background-color: @comment-level-2-bg;
 }
 
-.comment .comment,
-.comment .comment .comment .comment,
-.comment .comment .comment .comment .comment .comment,
-.comment .comment .comment .comment .comment .comment .comment .comment,
-.comment .comment .comment .comment .comment .comment .comment .comment .comment .comment {
-	background-color: rgb(250, 250, 250);
+.generate-comment-bgs(11);
+.generate-comment-bgs(@max-i; @i: 1) when (@i <= @max-i) {
+	.comment when (@i <= 2) {
+		.generate-comment-bgs(@max-i; @i + 1);
+	}
+	.comment when (@i > 2) and (mod(@i, 2) = 0) {
+		&:extend(.comment .comment);
+		.generate-comment-bgs(@max-i; @i + 1);
+	}
+	.comment when (@i > 2) and (mod(@i, 2) = 1) {
+		&:extend(.comment);
+		.generate-comment-bgs(@max-i; @i + 1);
+	}
 }
 
 .comment {
@@ -829,11 +906,14 @@ html.res-nightmode .link.over18.visited a.title {
 	}
 	
 	.tagline {
-		color: rgb(175, 175, 175);
+		color: @entry-buttons-color;
 	}
 	
-	.buttons li a {
-		color: rgb(175, 175, 175);
+	.buttons li {
+		a:extend(.link .buttons li a) {}
+		a:hover:extend(.link .buttons li a:hover) {}
+		
+		a[onclick*="reply"]:extend(.link .buttons li a.comments) {}
 	}
 }
 
@@ -850,253 +930,240 @@ html.res-nightmode .link.over18.visited a.title {
 * Submission pages *
 *******************/
 
-.submit-page .roundfield:not(.info-notice) {
-	background-color: transparent !important;
-}
-
-.submit-page .formtabs-content {
-	position: relative;
-	left: calc(40% - 218px);
-	
-	padding-bottom: 80px;
-}
-
-.submit-page .tabmenu {
-	left: calc(40% - 168px);
-	z-index: 1;
-}
-
-.submit-page .submit .info-notice {
-	position: relative;
-	left: calc(40% - 187px);
-	top: -90px;
-	
-	padding-right: 11px;
-	
-	border-left: none;
-	border-right: none;
-	border-radius: 0;
-}
-
-.submit-page .submit button[type="submit"] {
-	position: relative;
-	left: calc(40% - 175px);
-	top: -88px;
-}
-
-@media all and (max-width: 1300px) {
-	.submit-page .formtabs-content  {
-		left: calc(50% - 442px);
+.submit-page {
+	.roundfield:not(.info-notice) {
+		background-color: transparent !important;
 	}
 	
-	.submit-page .tabmenu {
-		left: calc(50% - 392px);
+	.formtabs-content {
+		position: relative;
+		left: calc(40% - 218px);
+		
+		padding-bottom: 80px;
 	}
 	
-	.submit-page .submit .info-notice {
-		left: calc(50% - 411px);
+	.tabmenu {
+		left: calc(40% - 168px);
+		z-index: 1;
+		
+		&:after {
+			content: @submit-type-select-message;
+			display: inline-block;
+			
+			position: relative;
+			left: 90px;
+			
+			font-size: 11px;
+			color: rgba(150, 150, 150, 0.4);
+		}
+		
+		li:first-child:hover {
+			&::before {
+				content: "";
+				display: block;
+				
+				position: absolute;
+				top: 10px;
+				left: 36px;
+				
+				border-width: 8px;
+				border-style: solid;
+				border-color: transparent transparent rgba(255, 100, 100, 0.9);
+			}
+			
+			&::after {
+				content: @submit-type-select-link-message;
+				display: block;
+				width: auto;
+				
+				position: absolute;
+				top: 26px;
+				left: 26px;
+				
+				padding: 6px;
+				
+				background-color: rgba(255, 100, 100, 0.9);
+				
+				font-weight: normal;
+				font-size: 12px;
+				color: white;
+			}
+		}
 	}
 	
-	.submit-page .submit button[type="submit"] {
-		left: calc(50% - 399px);
+	.submit {
+		.info-notice {
+			position: relative;
+			left: calc(40% - 187px);
+			top: -90px;
+			
+			padding-right: 11px;
+			
+			border-left: none;
+			border-right: none;
+			border-radius: 0;
+		}
+		
+		.infobar {
+			font-size: 0;
+			
+			&:after {
+				content: @submit-text-message;
+				display: inline-block;
+				
+				font-size: 13px;
+			}
+		}
+		
+		button[type="submit"] {
+			position: relative;
+			left: calc(40% - 175px);
+			top: -88px;
+		}
 	}
-}
-
-.submit-page #title-field {
-	margin-top: 100px;
-}
-
-.submit-page .submit_text {
-	position: absolute;
-	top: 112px;
-}
-
-.submit-page .submit_text h1 {
-	color: rgb(14, 137, 204);
-	margin: 2px 0;
-}
-
-/* Remove elements */
-
-.submit-page .content[role="main"] > h1 {
-	display: none;
-}
-
-/* Messages */
-
-.submit-page .tabmenu:after {
-	content: "Remember to choose the correct post type!";
-	display: inline-block;
 	
-	position: relative;
-	left: 90px;
+	#title-field {
+		margin-top: 100px;
+	}
 	
-	font-size: 11px;
-	color: rgba(150, 150, 150, 0.4);
-}
-
-.submit-page .submit .infobar {
-	font-size: 0;
-}
-
-.submit-page .submit .infobar:after {
-	content: "You are submitting a text-based post. A title is required, but expanding further in the text field is not. Including 'upvote if' or 'don't upvote' is violation of Bandle City law.";
-	display: inline-block;
+	.submit_text {
+		position: absolute;
+		top: 112px;
+		
+		h1 {
+			color: rgb(14, 137, 204);
+			margin: 2px 0;
+		}
+	}
 	
-	font-size: 13px;
-}
-
-.submit-page .tabmenu li:first-child:hover::before {
-	content: "";
-	display: block;
-	
-	position: absolute;
-	top: 10px;
-	left: 36px;
-	
-	border-width: 8px;
-	border-style: solid;
-	border-color: transparent transparent rgba(255, 100, 100, 0.9);
-}
-
-.submit-page .tabmenu li:first-child:hover::after {
-	content: "Images must NOT be submitted as links.";
-	display: block;
-	width: auto;
-	
-	position: absolute;
-	top: 26px;
-	left: 26px;
-	
-	padding: 6px;
-	
-	background-color: rgba(255, 100, 100, 0.9);
-	
-	font-weight: normal;
-	font-size: 12px;
-	color: white;
+	// Remove elements
+	.content[role="main"] > h1 {
+		display: none;
+	}
 }
 
 /*******
 * Wiki *
 *******/
 
-.wiki-page .wiki {
-	margin-left: 10px;
-	margin-top: 20px;
-}
-
-.wiki-page .wikititle {
-	display: none;
-}
-
-.wiki-page .wiki-page-content {
-	margin: 15px;
-}
-
-.wiki-page .pageactions {
-	position: absolute;
-	top: 240px;
-	left: 17px;
-	
-	border-radius: 0;
-}
-
-.wiki-page .pageactions .wikiaction {
-	margin: 1px;
-	
-	border-radius: 0;
-}
-
-.wiki-page .pageactions .wikiaction-current {
-	background-color: rgb(14, 137, 204);
-}
-
-.wiki-page .toc {
-	margin-right: 10px;
-}
-
-.wiki-page .toc > ul {
-	padding: 4px 8px !important;
-	
-	background-color: white;
-}
-
-@media all and (min-height: 740px) and (max-height: 799px) {
-	.wiki-page .toc ul li {
-		font-size: 12px;
+.wiki-page {
+	.wiki {
+		margin-left: 10px;
+		margin-top: 20px;
 	}
-}
 
-@media all and (max-height: 739px) {
-	.wiki-page .toc ul li {
-		font-size: 11px;
+	.wikititle {
+		display: none;
 	}
-}
 
-.wiki-page .toc > ul > li:not(.toc_child) {
-	font-weight: bold;
-}
+	.wiki-page-content {
+		margin: 15px;
+	}
 
-/* Rules */
+	.pageactions {
+		position: absolute;
+		top: 240px;
+		left: 17px;
+		
+		border-radius: 0;
+		
+		.wikiaction {
+			margin: 1px;
+			
+			border-radius: 0;
+		}
+		
+		.wikiaction-current {
+			background-color: rgb(14, 137, 204);
+		}
+	}
 
-.wiki-page.wiki-page-rules .wiki {
-	width: calc(100% - 340px);
-}
+	.toc {
+		margin-right: 10px;
+		
+		> ul {
+			padding: 4px 8px !important;
+			
+			background-color: white;
+			
+			li {
+				@media all and (min-height: 740px) and (max-height: 799px) {
+					font-size: 12px;
+				}
+				
+				@media all and (max-height: 739px) {
+					font-size: 11px;
+				}
+			}
+			
+			> li:not(.toc_child) {
+				font-weight: bold;
+			}
+		}
+	}
 
-.wiki-page.wiki-page-rules .toc {
-	position: fixed;
-	right: 334px;
-	top: 240px;
-}
+	// Rules
+	&.wiki-page-rules {
+		.wiki {
+			width: calc(100% - 340px);
+		}
+		
+		.toc {
+			position: fixed;
+			right: 334px;
+			top: 240px;
+		}
+	}
 
-/* RES fixes */
-
-.markdownEditor-wrapper {
-	max-height: 30px;
-	margin-top: 34px;
+	// RES fixes
+	.markdownEditor-wrapper {
+		max-height: 30px;
+		margin-top: 34px;
+	}
 }
 
 /********
 * Other *
 ********/
 
+// Things like the subscribe hover thing
 .hover-bubble {
 	background-color: rgba(5, 5, 13, 0.9);
 	border: 1px solid rgba(14, 137, 204, 0.6);
-}
-
-.hover-bubble.anchor-right.anchor-right:before,
-.hover-bubble.anchor-left.anchor-right:before {
-	border-left-color: rgba(14, 137, 204, 0.6);
-}
-
-.hover-bubble.anchor-right.anchor-right:after,
-.hover-bubble.anchor-left.anchor-right:after {
-	border-left-color: rgba(5, 5, 13, 0.9);
-}
-
-.hover-bubble.multi-selector strong {
-	color: rgb(14, 137, 204);
-}
-
-.hover-bubble.multi-selector label {
-	color: rgb(225, 225, 225);
-}
-
-.hover-bubble.multi-selector label:hover {
-	background-color: rgba(5, 5, 13, 0.9);
-}
-
-.hover-bubble.multi-selector .create-multi input.multi-name {
-	background-color: rgba(5, 5, 13, 0.9);
-	border-color: rgba(14, 137, 204, 0.6);
 	
-	color: rgb(225, 225, 225);
+	&.anchor-right.anchor-right:before,
+	&.anchor-left.anchor-right:before {
+		border-left-color: rgba(14, 137, 204, 0.6);
+	}
+
+	&.anchor-right.anchor-right:after,
+	&.anchor-left.anchor-right:after {
+		border-left-color: rgba(5, 5, 13, 0.9);
+	}
+
+	&.multi-selector {
+		strong {
+			color: rgb(14, 137, 204);
+		}
+		
+		label {
+			color: rgb(225, 225, 225);
+			
+			&:hover {
+				background-color: rgba(5, 5, 13, 0.9);
+			}
+		}
+		
+		.create-multi input.multi-name {
+			background-color: rgba(5, 5, 13, 0.9);
+			border-color: rgba(14, 137, 204, 0.6);
+			
+			color: rgb(225, 225, 225);
+		}
+	}
 }
 
 // "No Participation" mode
-
 body:lang(np):not(.subscriber) {
 	.arrow {
 		visibility: hidden !important;
@@ -1137,15 +1204,14 @@ body:lang(np):not(.subscriber) {
 **************************/
 
 // Spoiler Tag
-
 a[href$="/spoiler"], a[href$="#spoiler"] {
 	background: none repeat scroll 0 0 #000000 !important;
 	color: #000000 !important;
 	cursor: default;
-}
-
-a[href$="/spoiler"]:hover, a[href$="#spoiler"]:hover {
-	color: #FFFFFF !important;
+	
+	&:hover {
+		color: #FFFFFF !important;
+	}
 }
 
 // AutoWikibot hover to display by /u/Dropping_fruits
@@ -1166,14 +1232,24 @@ a[href$="/spoiler"]:hover, a[href$="#spoiler"]:hover {
 * Mod stuff *
 ************/
 
-/* Mod buttons */
-
-.entry .buttons .remove-button a {
-	color: rgb(240, 100, 100) !important;
-}
-
-.entry .buttons .approve-button a{
-	color: rgb(100, 220, 100) !important;
+// Mod buttons
+.entry .buttons{
+	
+	.remove-button a {
+		color: @entry-remove-color !important;
+		
+		&:hover {
+			color: saturate(@entry-remove-color, 25%) !important;
+		}
+	}
+	
+	.approve-button a{
+		color: @entry-approve-color !important;
+		
+		&:hover {
+			color: saturate(@entry-approve-color, 25%) !important;
+		}
+	}
 }
 
 /* Reports */
@@ -1235,7 +1311,7 @@ a[href$="/spoiler"]:hover, a[href$="#spoiler"]:hover {
 	margin: 20px 20px 0 0;
 	padding: 6px;
 	
-	transition: 0.1s linear background-color;
+	transition: background-color @transition-time ease;
 }
 
 #image-preview-list li:hover {
@@ -1246,4 +1322,4 @@ a[href$="/spoiler"]:hover, a[href$="#spoiler"]:hover {
 * Dark mode *
 ************/
 
-@import "darkmode";
+//@import "darkmode";

@@ -1,5 +1,12 @@
 // General
+@font-family: arial,sans-serif;
+
 @link: rgb(148, 114, 77);
+@link-highlight: rgb(14, 137, 204);
+
+@transition-time: 0.15s;
+
+@no-results-message: "there don't seem to be any friends here";
 
 // Background
 @bg-color: rgb(0, 0, 0);
@@ -15,18 +22,23 @@
 
 // Server status
 @status-tabs: 9;
-@status-pos-x: calc(~'40% - 132px');
-@status-pos-y: 132px;
+@status-pos-x: calc(~'40% - 200px');
+@status-pos-y: 136px;
 @status-tab-width: 46px;
 @status-tab-height: 20px;
 @status-none: rgb(50, 50, 50);
 @status-norm: rgb(57, 155, 154);
-@status-bad: rgb(235, 57, 57);
-@status-warn: rgb(255, 156, 0);
+@status-bad: darken(rgb(235, 57, 57), 2%);
+@status-warn: darken(rgb(255, 156, 0), 4%);
 @status-round: 6px;
+@status-open-time: 0.3s;
 
 // Main menu
 @menu-round: 6px;
+@menu-bg: rgba(7, 13, 35, 0.92);
+@menu-border: #51B4BB;
+@menu-color: #D1D3D5;
+@menu-link-color: #6AC4CC;
 
 // Sidebar
 @side-bg: rgba(0, 0, 0, 0.88);
@@ -36,7 +48,9 @@
 @side-user-text: "Summoners";
 @side-online-text: "on the Rift";
 
-// Sections
+@side-glow-time: 0.2s;
+
+// Side sections
 @side-color: rgb(202, 181, 162);
 @side-secondary-color: rgb(136, 136, 136);
 @side-header-font-size: 18px;
@@ -53,3 +67,23 @@
 @news-opacity: 0.75;
 @news-fade: rgba(0, 0, 0, 0.5);
 @news-font: "TradeCn","Arial Narrow",Arial,Helvetica,sans-serif;
+
+// Entries
+@entry-buttons-color: rgb(170, 170, 170);
+@entry-remove-color: rgb(240, 100, 100);
+@entry-approve-color: rgb(100, 220, 100);
+
+@entry-author: rgb(70, 70, 70);
+
+// Links
+@expando-size: 16px;
+@downvote-message: "off-topic or does not contribute to discussion";
+
+// Comments
+@comment-level-1-bg: rgb(255, 255, 255);
+@comment-level-2-bg: rgb(250, 250, 250);
+
+// Submission page
+@submit-type-select-message: "Remember to choose the correct post type!";
+@submit-type-select-link-message: "Images must NOT be submitted as links.";
+@submit-text-message: "You are submitting a text-based post. A title is required, but expanding further in the text field is not. Including 'upvote if' or 'don't upvote' is violation of Bandle City law.";
